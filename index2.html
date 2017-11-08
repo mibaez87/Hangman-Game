@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>By Order of the Queen: Off With Your Head!</title>
+</head>
+
+<body>
+
+    <div id="game">
+        <p>Press any key to challenge the Queen of Hearts</p>
+    </div>
+
+    <script type="text/javascript">
+        var wordBank = ["white rabbit", "wonderland", "potion", "caterpillar", "tea party", "mad hatter"];
+
+        var random = Math.floor(Math.random() * wordBank.length);
+        var solution = wordBank[random]
+        var dashes = []
+        var wins = 0;
+        var remGuess = 6;
+        var lettersGuessed = [];
+
+        var createDashes = () => {
+            for (var i = 0; i < solution.length; i++) {
+                if (solution[i] === " ") {
+                    dashes.push(" ");
+                } else {
+                    dashes.push("-");
+                }
+            }
+            console.log(solution)
+        }
+
+        document.onkeyup = function (event) {
+            var userGuess = event.key;
+            if (solution.indexOf(userGuess) > -1) {
+                dashes = userGuess;
+            } else {
+                lettersGuessed.push(userGuess);
+                remGuess--;
+                if remGuess === 0 {
+                    alert("The Queen Wins!");
+                    
+                }
+            }
+            htmlDisplay(wins, remGuess, lettersGuessed, solution);
+        }
+
+        function htmlDisplay(wins, remGuess, lettersGuessed, solution) {
+            var html =
+                "<p>You've been spared by the Queen " + wins + " times!</p>" +
+                "<p>Only " + remGuess + " guesses left before you lose your head...</p>" +
+                "<p>You've Guessed: " + lettersGuessed + "</p>" +
+                "<p>" + solution + "</p>";
+            document.getElementById("game").innerHTML = html;
+        }
+    </script>
+
+</body>
+
+</html>

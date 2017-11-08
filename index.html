@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>By Order of the Queen: Off With Your Head!</title>
+</head>
+
+<body>
+
+    <div id="game">
+        <p>Press any key to challenge the Queen of Hearts</p>
+    </div>
+
+    <script type="text/javascript">
+        var wordBank = ["white rabbit", "wonderland", "potion", "caterpillar", "tea party", "mad hatter"];
+
+        var wins = 0;
+        var remGuess = 6;
+        var wordIndex = 0;
+        var solution = "";
+        var lettersGuessed = [];
+        var myWord = wordBank[wordIndex];
+
+        for (var i = 0; i < myWord.length; i++) {
+            if (myWord[i] === " ") {
+                solution += " ";
+            } else {
+                solution += "-";
+            }
+        }
+
+        htmlDisplay(wins, remGuess, "", solution);
+
+        document.onkeyup = function (event) {
+            var userGuess = event.key;
+            // var match = myWord.indexOf(userGuess);
+
+            for (var i = 0; i < myWord.length; i++) {
+                if (myWord[i] === userGuess) {
+                    solution[i] === userGuess;
+                } else {
+                    lettersGuessed.push(userGuess);
+                }
+            }
+
+            // if (match > -1) {
+            //     if (match > 0)
+            //         solution = solution.substr(0, match) + userGuess + solution.substr(match + 1, 100);
+            //     else
+            //         solution = userGuess + solution.substr(match + 1, 100);
+            // } else {
+            //     lettersGuessed = lettersGuessed + userGuess;
+            //     if (lettersGuessed.length > 6) {
+            //         userLoss = "<p>The Queen Wins!</p>";
+            //         document.getElementById("game").innerHTML = userLoss;
+            //     }
+            // }
+            // if (lettersGuessed.length <= 6) {
+            //     htmlDisplay(wins, remGuess, lettersGuessed, solution);
+            // }
+        }
+
+        function htmlDisplay(wins, remGuess, lettersGuessed, solution) {
+            var html =
+                "<p>You've been spared by the Queen " + wins + " times!</p>" +
+                "<p>Only " + remGuess + " guesses left before you lose your head...</p>" +
+                "<p>You've Guessed: " + lettersGuessed + "</p>" +
+                "<p>" + solution + "</p>";
+            document.getElementById("game").innerHTML = html;
+        }
+    </script>
+
+</body>
+
+</html>
