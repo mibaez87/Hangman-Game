@@ -22,15 +22,14 @@
         var remGuess = 6;
         var lettersGuessed = [];
 
-        var createDashes = () => {
-            for (var i = 0; i < solution.length; i++) {
-                if (solution[i] === " ") {
-                    dashes.push(" ");
-                } else {
-                    dashes.push("-");
-                }
+        for (var i = 0; i < solution.length; i++) {
+            if (solution[i] === " ") {
+                dashes.push(" ");
+            } else {
+                dashes.push("-");
             }
-            console.log(solution)
+        }
+        console.log(solution)
         }
 
         document.onkeyup = function (event) {
@@ -42,7 +41,7 @@
                 remGuess--;
                 if remGuess === 0 {
                     alert("The Queen Wins!");
-                    
+
                 }
             }
             htmlDisplay(wins, remGuess, lettersGuessed, solution);
