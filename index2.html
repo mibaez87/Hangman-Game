@@ -37,34 +37,35 @@
         }
 
         document.onkeyup = function (event) {
-                var userGuess = event.key;
+            var userGuess = event.key;
 
+            for (var j = 0; j < solution.length; j++) {
                 if (solution.indexOf(userGuess) > -1) {
                     goodGuess.push(userGuess);
-                    dashes[solution.indexOf(userGuess)] = userGuess;
-                    if (dashes.join('') == solution) {
-                        alert("You win!");
-                        wins++;
-                    }
+                    // dashes[solution.indexOf(userGuess)] = userGuess;
+                    dashes.splice(i, 1, userGuess);
                 } else {
                     badGuess.push(userGuess);
                     remGuess--;
                     if (remGuess === 0) {
                         alert("You lose! Off with your head!");
-                        alert(playAgain);
+                        if (!confirm("Play again?")) {
+                            wins === 0;
+                        }
                     }
                     htmlDisplay(wins, remGuess, badGuess, dashes);
                 }
+            }
         }
 
-                function htmlDisplay(wins, remGuess, badGuess, dashes) {
-                    var html =
-                        "<p id=p1>You've been spared by the Queen " + wins + " times!</p>" +
-                        "<br><p id=p2>Only " + remGuess + " guesses left before you lose your head...</p>" +
-                        "<br><p id=p3>You've Guessed: " + badGuess + "</p>" +
-                        "<br><p id=p4>" + dashes + "</p>";
-                    document.getElementById("game").innerHTML = html;
-                }
+        function htmlDisplay(wins, remGuess, badGuess, dashes) {
+            var html =
+                "<p id=p1>You've been spared by the Queen " + wins + " times!</p>" +
+                "<br><p id=p2>Only " + remGuess + " guesses left before you lose your head...</p>" +
+                "<br><p id=p3>You've Guessed: " + badGuess + "</p>" +
+                "<br><p id=p4>" + dashes + "</p>";
+            document.getElementById("game").innerHTML = html;
+        }
     </script>
 
 </body>
