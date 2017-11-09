@@ -33,30 +33,38 @@
                 dashes.push(" ");
             }
             console.log(solution)
-            console.log(dashes)
         }
 
         document.onkeyup = function (event) {
             var userGuess = event.key;
+            var rightGuess = false;
 
-            for (var j = 0; j <solution.length; j++) {
+            for (var j = 0; j < solution.length; j++) {
                 if (solution[j] === userGuess) {
-                    goodGuess.push(userGuess);
-                    dashes[solution.indexOf(userGuess)] = userGuess;
                     dashes.splice(j, 1, userGuess);
-                } 
-                else {
-                    badGuess.push(userGuess);
-                    remGuess--;
-                    if (remGuess === 0) {
-                        alert("You lose! Off with your head!");
-                        if (!confirm("Play again?")) {
-                            wins === 0;
-                        }
+                    dashes[solution.indexOf(userGuess)] = userGuess;
+                    goodGuess.push(userGuess);
+                    rightGuess= true;
+                    console.log(goodGuess)
+                    if (dashes[j] === solution) {
+                        alert("You win!");
+                        wins++;
                     }
-                    htmlDisplay(wins, remGuess, badGuess, dashes);
                 }
             }
+            if (rightGuess === false) {
+                badGuess.push(userGuess);
+                console.log(badGuess)
+                remGuess--;
+            }
+
+            if (remGuess === 0) {
+                alert("You lose! Off with your head!");
+                if (!confirm("Play again?")) {
+
+                }
+            }
+            htmlDisplay(wins, remGuess, badGuess, dashes);
         }
 
         function htmlDisplay(wins, remGuess, badGuess, dashes) {
