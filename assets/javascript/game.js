@@ -7,6 +7,7 @@ var goodGuess = [];
 var badGuess = [];
 var wins = 0;
 var remGuess = 7;
+var space = solution.indexOf(" ") + 1;
 
 function createDash() {
     for (var i = 0; i < solution.length; i++) {
