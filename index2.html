@@ -4,57 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <title>By Order of the Queen: Off With Your Head!</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn+SC:700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
 </head>
 
 <body>
 
     <div id="game">
-        <p>Press any key to challenge the Queen of Hearts</p>
+        <p>Press spacebar to challenge the Queen of Hearts</p>
     </div>
 
     <script type="text/javascript">
         var wordBank = ["white rabbit", "wonderland", "potion", "caterpillar", "tea party", "mad hatter"];
 
         var random = Math.floor(Math.random() * wordBank.length);
-        var solution = wordBank[random]
-        var dashes = []
+        var solution = wordBank[random];
+        var dashes = [];
+        var goodGuess = [];
+        var badGuess = [];
         var wins = 0;
-        var remGuess = 6;
-        var lettersGuessed = [];
+        var remGuess = 7;
 
         for (var i = 0; i < solution.length; i++) {
-            if (solution[i] === " ") {
+            dashes.push("-");
+            if (solution === " ") {
                 dashes.push(" ");
-            } else {
-                dashes.push("-");
             }
-        }
-        console.log(solution)
+            console.log(solution)
+            console.log(dashes)
         }
 
         document.onkeyup = function (event) {
-            var userGuess = event.key;
-            if (solution.indexOf(userGuess) > -1) {
-                dashes = userGuess;
-            } else {
-                lettersGuessed.push(userGuess);
-                remGuess--;
-                if remGuess === 0 {
-                    alert("The Queen Wins!");
+                var userGuess = event.key;
 
+                if (solution.indexOf(userGuess) > -1) {
+                    goodGuess.push(userGuess);
+                    dashes[solution.indexOf(userGuess)] = userGuess;
+                    if (dashes.join('') == solution) {
+                        alert("You win!");
+                        wins++;
+                    }
+                } else {
+                    badGuess.push(userGuess);
+                    remGuess--;
+                    if (remGuess === 0) {
+                        alert("You lose! Off with your head!");
+                        alert(playAgain);
+                    }
+                    htmlDisplay(wins, remGuess, badGuess, dashes);
                 }
-            }
-            htmlDisplay(wins, remGuess, lettersGuessed, solution);
         }
 
-        function htmlDisplay(wins, remGuess, lettersGuessed, solution) {
-            var html =
-                "<p>You've been spared by the Queen " + wins + " times!</p>" +
-                "<p>Only " + remGuess + " guesses left before you lose your head...</p>" +
-                "<p>You've Guessed: " + lettersGuessed + "</p>" +
-                "<p>" + solution + "</p>";
-            document.getElementById("game").innerHTML = html;
-        }
+                function htmlDisplay(wins, remGuess, badGuess, dashes) {
+                    var html =
+                        "<p id=p1>You've been spared by the Queen " + wins + " times!</p>" +
+                        "<br><p id=p2>Only " + remGuess + " guesses left before you lose your head...</p>" +
+                        "<br><p id=p3>You've Guessed: " + badGuess + "</p>" +
+                        "<br><p id=p4>" + dashes + "</p>";
+                    document.getElementById("game").innerHTML = html;
+                }
     </script>
 
 </body>

@@ -1,0 +1,28 @@
+body {
+    background-image: url("../images/rabbithole.jpg");
+    font-family: 'Vollkorn SC', serif;
+    width: 100%;
+}
+
+p {
+    text-align: center;
+    font-family: 'Vollkorn SC', serif;
+    color: #ffffff;
+}
+
+#p2{
+    color: #ff0000;
+}
+
+#p3 {
+    color: #000000;
+}
+#p4 {
+    font-size: 70px;
+}
+
+#game {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Vollkorn SC', serif;
+}
