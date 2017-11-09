@@ -39,12 +39,13 @@
         document.onkeyup = function (event) {
             var userGuess = event.key;
 
-            for (var j = 0; j < solution.length; j++) {
-                if (solution.indexOf(userGuess) > -1) {
+            for (var j = 0; j <solution.length; j++) {
+                if (solution[j] === userGuess) {
                     goodGuess.push(userGuess);
-                    // dashes[solution.indexOf(userGuess)] = userGuess;
-                    dashes.splice(i, 1, userGuess);
-                } else {
+                    dashes[solution.indexOf(userGuess)] = userGuess;
+                    dashes.splice(j, 1, userGuess);
+                } 
+                else {
                     badGuess.push(userGuess);
                     remGuess--;
                     if (remGuess === 0) {
